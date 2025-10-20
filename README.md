@@ -1,6 +1,6 @@
 MinhaAPI — Documentação Oficial
 
-env está na gitignore
+env está na gitignore, precisa criar toda vez que for usar
 
 Índice
 O que é MinhaAPI?
