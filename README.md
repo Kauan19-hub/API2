@@ -238,7 +238,7 @@ lower or equal = le ### menor ou igual...
 
 ###
 
-Deseja contribuir? Veja o arquivo [CONTRIBUTING.md](github.com/Kauan19-hub/CONTRIBUTING.md) no repositório para guias e código de conduta.
+Deseja contribuir? Veja o arquivo [CONTRIBUTING.md](github.com/Kauan19-hub/CONTRIBUTING.md.git) no repositório para guias e código de conduta.
 
 ###
 
