@@ -1,85 +1,146 @@
-MinhaAPI — Documentação Oficial
+**<h2> Documentação Oficial</h2>**
 
-env está na gitignore, precisa criar toda vez que for usar
+###
 
-Índice
-O que é MinhaAPI?
-Instalação
-Primeiros passos
-Estrutura da API
-Exemplos de uso
-Configurações avançadas
-Boas práticas
-Perguntas frequentes (FAQ)
-Contribuindo
-Licença
+API é uma **biblioteca**/**framework** leve e intuitiva para construir **APIs** **RESTful** de forma rápida e eficiente em **Python**. Inspirada em boas práticas
+modernas, **API** facilita a criação, validação e documentação automática das rotas da sua aplicação.
 
-O que é MinhaAPI?
+###
 
-MinhaAPI é uma biblioteca/framework leve e intuitiva para construir APIs RESTful de forma rápida e eficiente em Python. Inspirada em boas práticas modernas, MinhaAPI facilita a criação, validação e documentação automática das rotas da sua aplicação.
+**<h2>Índice</h2>**
 
-Instalação
+###
 
-Para começar a usar MinhaAPI, você só precisa do Python 3.8+ e instalar via pip:
+- O que é API;
+- Instalação;
+- Primeiros passos;
+- Estrutura da API;
+- Exemplos de uso;
+- Configurações avançadas;
+- Instalação.
 
-pip install minhaapi
+---
 
-Se quiser testar a API localmente, recomendamos usar o servidor ASGI rápido:
+**<h2>Começando</h2>**
 
+Para começar a usar **API**, você só precisa do `Python 3.8+` e instalar via `pip`:
+
+###
+```python
+pip install api
+```
+
+###
+
+✅ Se quiser testar a API localmente, recomendamos usar o servidor ASGI rápido:
+
+###
+```python
 pip install uvicorn
+```
 
-Primeiros passos
+###
 
-Vamos criar uma API simples que responde "Olá, mundo!".
+Vamos criar uma **API** simples que responde **"API With FastAPI"**.
 
-from minhaapi import MinhaAPI
+###
+```python
+from fastapi import FastAPI
 
-app = MinhaAPI()
+app = FastAPI()
 
 @app.get("/")
 def home():
-    return {"message": "Olá, mundo!"}
+    return {"message": "API With FastAPI"}
+```
 
+###
 
-Para rodar, salve o código acima em main.py e execute:
+✅ Para rodar, salve o código acima em `main.py` e rode:
 
+###
+```powershell
 uvicorn main:app --reload
+```
 
---reload reinicia o servidor automaticamente quando houver mudanças no código, ótimo para desenvolvimento.
+###
 
-Abra o navegador e acesse:
+`--reload` reinicia o servidor automaticamente quando houver mudanças no código, ótimo para **desenvolvimento**.
 
+---
+
+Abra o **navegador** e acesse:
+
+###
+```powershell
 http://127.0.0.1:8000/
+```
 
+###
 
-Você verá:
+✅ Você verá: `{"message": "API With Python"}`
 
-{"message": "Olá, mundo!"}
+###
 
-Estrutura da API
-Rotas
+**<h2>Estrutura da API</h2>**
 
-As rotas definem os endpoints da sua API. Cada rota está associada a um método HTTP:
-@app.get("/caminho") — responde a requisições GET
-@app.post("/caminho") — responde a POST
-@app.put("/caminho") — responde a PUT
-@app.delete("/caminho") — responde a DELETE
+###
 
-Parâmetros
+**Rotas**
 
-Você pode definir parâmetros na URL:
+###
 
+As rotas definem os **endpoints** da sua **API**. Cada rota está associada a um método `HTTP`:
+
+###
+```python
+@app.get("/caminho") ### responde a requisições GET
+```
+
+###
+```python
+@app.post("/caminho") ### responde a POST
+```
+
+###
+```python
+@app.put("/caminho") ### responde a PUT
+```
+
+###
+```python
+@app.delete("/caminho") ### responde a DELETE
+```
+
+###
+
+**<h2>Parâmetros</h2>**
+
+###
+
+✅ Você pode definir parâmetros na `URL`:
+
+###
+```python
 @app.get("/items/{item_id}")
 def read_item(item_id: int):
     return {"item_id": item_id}
+```
 
+###
 
-Aqui, item_id é um parâmetro do tipo inteiro extraído da URL.
+Aqui, `item_id` é um parâmetro do tipo **inteiro** extraído da `URL`.
 
-Corpo da requisição
+---
 
-Para receber dados via JSON, defina parâmetros com tipos e MinhaAPI valida automaticamente:
+**<h2>Corpo da requisição</h2>**
 
+###
+
+Para receber dados via `JSON`, defina **parâmetros** com tipos e **API** valida automaticamente:
+
+###
+```python
 from pydantic import BaseModel
 
 class Item(BaseModel):
@@ -89,12 +150,18 @@ class Item(BaseModel):
 @app.post("/items/")
 def create_item(item: Item):
     return item
+```
 
-Exemplos de uso
-Validação automática com Pydantic
+###
 
-MinhaAPI integra o Pydantic para validação dos dados de entrada e saída.
+**<h2>Exemplos de uso</h2>**
 
+###
+
+✅ Validação automática com `Pydantic`. **API** integra o `Pydantic` para validação dos dados de entrada e saída.
+
+###
+```python
 from pydantic import BaseModel
 
 class Usuario(BaseModel):
@@ -104,75 +171,85 @@ class Usuario(BaseModel):
 @app.post("/usuarios/")
 def criar_usuario(usuario: Usuario):
     return {"mensagem": f"Usuário {usuario.nome} criado com sucesso!"}
+```
 
+###
 
-Se o JSON enviado não corresponder ao modelo, a API responde com erro 422 e uma mensagem clara.
+> Se o `JSON` enviado não corresponder ao modelo, a **API** responde com erro `422` e uma mensagem clara.
 
-Documentação automática
+---
 
-Sua API já terá documentação interativa acessível via:
+**<h2>Documentação automática<h2>**
 
+###
+
+✅ Sua **API** já terá documentação **interativa** acessível via:
+
+###
+```powershell
 Swagger UI: http://127.0.0.1:8000/docs
+```
 
+###
+```powershell
 ReDoc: http://127.0.0.1:8000/redoc
+```
 
-Você pode testar todos os endpoints diretamente pelo navegador.
+---
 
-Configurações avançadas
-Middlewares
+Você pode testar **todos** os `endpoints` diretamente pelo navegador.
 
-Você pode adicionar middlewares para interceptar requisições e respostas:
+###
 
+- Configurações avançadas;
+- Middlewares.
+
+###
+
+✅ Você pode adicionar **middlewares** para interceptar requisições e respostas:
+
+###
+```python
 @app.middleware("http")
 async def log_request(request, call_next):
     print(f"Requisição para {request.url.path}")
     response = await call_next(request)
     return response
+```
 
-Segurança e autenticação
+###
 
-MinhaAPI oferece suporte integrado para OAuth2, JWT, API Keys e outras estratégias.
+**<h2>Segurança e autenticação</h2>**
 
-Boas práticas
+###
 
-Sempre defina modelos para dados de entrada e saída.
+- API oferece suporte integrado para `OAuth2`, `JWT`, `API Keys` e outras estratégias;
+- Sempre defina modelos para dados de entrada e saída;
+- Use validação automática para evitar erros comuns;
+- Documente cada rota com comentários para facilitar manutenção;
+- Utilize as ferramentas de documentação para testar sua `API` frequentemente;
+- Mantenha seu servidor atualizado para aproveitar melhorias de segurança.
 
-Use validação automática para evitar erros comuns.
+---
 
-Documente cada rota com comentários para facilitar manutenção.
+**</h2>Extras</h2>**
 
-Utilize as ferramentas de documentação para testar sua API frequentemente.
+###
 
-Mantenha seu servidor atualizado para aproveitar melhorias de performance e segurança.
+✅ `env` está na `.gitignore`, precisa criar toda vez que for usar;
 
-Perguntas frequentes (FAQ)
+###
+```python
+grater than = gt ### maior que...
+grater or equal = ge ### maior ou igual...
+lower than = lt ### menor que...
+lower or equal = le ### menor ou igual...
+```
 
-Como faço para retornar erros customizados?
-
-Use exceções específicas:
-
-from minhaapi import HTTPException
-
-@app.get("/protected")
-def protected():
-    raise HTTPException(status_code=401, detail="Não autorizado")
-
-
-POST: send data;
-PUT: update data;
-DELETE: delette data.
-
-grater than = gt / maior que...
-grater or equal = ge / maior ou igual...
-lower than = lt / menor que...
-lower or equal = le / menor ou igual...
-
-exemplo de query parametro também
+###
 
 
-Minha API suporta WebSockets?
 
-Sim! Você pode definir rotas para WebSocket nativamente.
 
 Contribuindo
 
@@ -182,4 +259,4 @@ Licença
 
 MinhaAPI está licenciada sob a licença MIT. Você pode usar, modificar e distribuir livremente, desde que mantenha os créditos aos autores originais.
 
-É possível desenvolver um pouco de front-end usando o pacote Angular, Bootstrap e tailwind css, e conectá-lo ao Back-End. Futuramente ele será desenvolvido.
+É possível desenvolver um pouco de front-end usando o pacote Angular, Bootstrap e tailwind css, e conectá-lo ao Back-End.
