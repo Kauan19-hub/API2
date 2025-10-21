@@ -1,15 +1,15 @@
-**<h2> Documentação Oficial</h2>**
+**<h2>Official Documentation</h2>**
 
 ###
 
-API é uma **biblioteca**/**framework** leve e intuitiva para construir **APIs** **RESTful** de forma rápida e eficiente em **Python**. Inspirada em boas práticas
-modernas, **API** facilita a criação, validação e documentação automática das rotas da sua aplicação.
+API is a  **library**/**framework** light and intuitive to build **APIs** **RESTful** quickly and efficiently in **Python**. Inspired by good practices
+modern, **API** facilitates the automatic creation, validation and documentation of your application's routes. 
 
 ###
 
-**<h2>Começando</h2>**
+**<h2>Starting</h2>**
 
-Para começar a usar **API**, você só precisa do `Python 3.8+` e instalar via `pip`:
+To start using **API**, you just need the `Python 3.8+` and install with `pip`:
 
 ###
 ```python
@@ -18,7 +18,7 @@ pip install api
 
 ###
 
-✅ Se quiser testar a API localmente, recomendamos usar o servidor ASGI rápido:
+✅ If you want to test the API locally, we recommend using the fast ASGI server:
 
 ###
 ```python
@@ -27,7 +27,7 @@ pip install uvicorn
 
 ###
 
-Vamos criar uma **API** simples que responde **"API With FastAPI"**.
+Let's create a **API** simple that responds **"API With FastAPI"**.
 
 ###
 ```python
@@ -42,7 +42,7 @@ def home():
 
 ###
 
-✅ Para rodar, salve o código acima em `main.py` e rode:
+✅ To run, save the above code in `main.py`:
 
 ###
 ```powershell
@@ -51,11 +51,11 @@ uvicorn main:app --reload
 
 ###
 
-`--reload` reinicia o servidor automaticamente quando houver mudanças no código, ótimo para **desenvolvimento**.
+`--reload` restarts the server automatically when there are code changes, great for  **development**.
 
 ---
 
-Abra o **navegador** e acesse:
+Open the **navigation** and access:
 
 ###
 ```powershell
@@ -64,47 +64,305 @@ http://127.0.0.1:8000/
 
 ###
 
-✅ Você verá: `{"message": "API With Python"}`
+✅ : `{"message": "API With Python"}`
 
 ###
 
-**<h2>Estrutura da API</h2>**
+**<h2>Official Documentation</h2>**
 
 ###
 
-**Rotas**
+API is a light and intuitive **library**/**framework** to build **APIs** **RESTful** quickly and efficiently in **Python**. Inspired by good practices
+modern, **API** facilitates the automatic creation, validation and documentation of your application's routes. 
 
 ###
 
-As rotas definem os **endpoints** da sua **API**. Cada rota está associada a um método `HTTP`:
+**<h2>Starting</h2>**
 
 ###
-```python
-@app.get("/caminho") ### responde a requisições GET
-```
 
-###
-```python
-@app.post("/caminho") ### responde a POST
-```
+To start using **API**, you just need the `Python 3.8+` and install with `pip`:
 
 ###
 ```python
-@app.put("/caminho") ### responde a PUT
-```
-
-###
-```python
-@app.delete("/caminho") ### responde a DELETE
+pip install api
 ```
 
 ###
 
-**<h2>Parâmetros</h2>**
+✅ If you want to test the API locally, we recommend using the fast ASGI server:
+
+###
+```python
+pip install uvicorn
+```
 
 ###
 
-✅ Você pode definir parâmetros na `URL`:
+Let's create a simple **API** that responds **"API With FastAPI"**.
+
+###
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "API With FastAPI"}
+```
+
+###
+
+✅ To run, save the above code in `main.py`:
+
+###
+```powershell
+uvicorn main:app --reload
+```
+
+###
+
+`--reload` restarts the server automatically when there are code changes, great for **development**.
+
+---
+
+Open the navigation and access:
+
+###
+```Powershell
+http://127.0.0.1:8000/
+```
+
+###
+
+✅ : `{"message": "API With Python"}`
+
+###
+
+**<h2>API Structure</h2>**
+
+###
+
+**Routes**
+
+###
+
+Routes define the endpoints of your API. Each route is associated with an HTTP method:
+
+###
+```python
+@app.get("/path") ### responds to GET requests
+```
+
+###
+```python
+@app.post("/path") ### responds to POST
+```
+
+###
+```python
+@app.put("/path") ### responds to PUT
+```
+
+###
+```python
+@app.delete("/path") ### responds to DELETE
+```
+
+###
+
+**<h2>Parameters</h2>**
+
+###
+
+✅ You can define parameters in the URL:
+
+###
+```python
+@app.get("/items/{item_id}")
+def read_item(item_id: int):
+return {"item_id": item_id}
+```
+
+###
+
+Here, `item_id` is an integer parameter extracted from the URL.
+
+---
+
+**<h2>Request Body</h2>**
+
+###
+
+To receive data via JSON, define typed parameters and the API automatically validates it:
+
+###
+```python
+from pydantic import BaseModel
+
+class Item(BaseModel):
+name: str
+price: float
+
+@app.post("/items/")
+def create_item(item: Item):
+return item
+```
+
+###
+
+**<h2>Usage Examples</h2>**
+
+###
+
+✅ Automatic validation with Pydantic. The API integrates with Pydantic to validate input and output data.
+
+###
+```python
+from pydantic import BaseModel
+
+class User(BaseModel):
+name: str
+email: str
+
+@app.post("/users/")
+def create_user(user: User):
+return {"message": f"User {user.name} created successfully!"}
+```
+
+###
+
+> If the sent JSON doesn't match the model, the API responds with a 422 error and a clear message.
+
+---
+
+**<h2>Automatic Documentation<h2>**
+
+###
+
+✅ Your **API** will already have **interactive** documentation accessible via:
+
+###
+```Powershell
+Swagger UI: http://127.0.0.1:8000/docs
+```
+
+###
+```Powershell
+ReDoc: http://127.0.0.1:8000/redoc
+```
+
+---
+
+You can test **all** endpoints directly through the browser.
+
+###
+
+- Advanced Settings;
+- Middlewares.
+
+###
+
+✅ You can add **middleware** to intercept requests and responses:
+
+###
+```python
+@app.middleware("http")
+async def log_request(request, call_next):
+print(f"Request for {request.url.path}")
+response = await call_next(request)
+return response
+```
+
+###
+
+**<h2>Security and Authentication</h2>**
+
+###
+
+- API offers built-in support for OAuth2, JWT, API Keys, and other strategies;
+- Always define models for input and output data;
+- Use automatic validation to avoid common errors;
+- Document each route with comments for easier maintenance;
+- Use documentation tools to test your API frequently;
+- Keep your server up to date to take advantage of security improvements.
+
+---
+
+**<h2>Extras</h2>**
+
+###
+
+✅ `env` is in `.gitignore`, you need to create it every time you use it.
+
+###
+```python
+grater than = gt ### greater than...
+grater or equal = ge ### greater than or equal...
+lower than = lt ### less than...
+lower or equal = le ### less than or equal...
+```
+
+###
+
+**<h2>Contributing</h2>**
+
+###
+
+Want to contribute? See the [CONTRIBUTING.md](github.com/Kauan19-hub/CONTRIBUTING.md.git) file in the repository for guidelines and code of conduct.
+
+###
+
+**<h2>License</h2>**
+
+###
+
+✅️ The project is licensed under the MIT license. You can use, modify, and distribute it freely, as long as you keep credit to the original authors.
+
+###
+
+You can develop a small front-end using the Angular, Bootstrap, and Tailwind CSS packages, and connect it to the back-end.
+
+---
+ 
+**<h2>API Structure</h2>**
+
+###
+
+**Routes**
+
+###
+
+Routes define the **endpoints** of yours  **API**. Each route is associated with a method `HTTP`:
+
+###
+```python
+@app.get("/caminho") ### responds to GET
+```
+
+###
+```python
+@app.post("/caminho") ### responds to POST
+```
+
+###
+```python
+@app.put("/caminho") ### responds to PUT
+```
+
+###
+```python
+@app.delete("/caminho") ### responds to DELETE
+```
+
+###
+
+**<h2>Parameters</h2>**
+
+###
+
+✅ You can set parameters in the `URL`:
 
 ###
 ```python
@@ -115,15 +373,15 @@ def read_item(item_id: int):
 
 ###
 
-Aqui, `item_id` é um parâmetro do tipo **inteiro** extraído da `URL`.
+Here, `item_id` is a **int** parameter extracted from `URL`.
 
 ---
 
-**<h2>Corpo da requisição</h2>**
+**<h2>Request body</h2>**
 
 ###
 
-Para receber dados via `JSON`, defina **parâmetros** com tipos e **API** valida automaticamente:
+To receive data via `JSON`, define  **parameters** with types and **API** automatically validates:
 
 ###
 ```python
@@ -140,36 +398,36 @@ def create_item(item: Item):
 
 ###
 
-**<h2>Exemplos de uso</h2>**
+**<h2>Examples of use</h2>**
 
 ###
 
-✅ Validação automática com `Pydantic`. **API** integra o `Pydantic` para validação dos dados de entrada e saída.
+✅ Automatic validation with `Pydantic`. **API** integrates the `Pydantic` for validating input and output data.
 
 ###
 ```python
 from pydantic import BaseModel
 
-class Usuario(BaseModel):
-    nome: str
+class User(BaseModel):
+    name: str
     email: str
 
 @app.post("/usuarios/")
-def criar_usuario(usuario: Usuario):
-    return {"mensagem": f"Usuário {usuario.nome} criado com sucesso!"}
+def create_user(user: User):
+    return {"mensagem": f"User {user.name} created!"}
 ```
 
 ###
 
-> Se o `JSON` enviado não corresponder ao modelo, a **API** responde com erro `422` e uma mensagem clara.
+> If `JSON` sent does not match the model, the **API** responds with error `422` and a clear message.
 
 ---
 
-**<h2>Documentação automática<h2>**
+**<h2>Automatic Documentation<h2>**
 
 ###
 
-✅ Sua **API** já terá documentação **interativa** acessível via:
+✅ Your **API** will already have documentation **interativa** accessible via: 
 
 ###
 ```powershell
@@ -183,38 +441,38 @@ ReDoc: http://127.0.0.1:8000/redoc
 
 ---
 
-Você pode testar **todos** os `endpoints` diretamente pelo navegador.
+You can test **all** the `endpoints` directly through the **browser**.
 
 ###
 
-- Configurações avançadas;
+- Advanced settings;
 - `Middlewares`.
 
 ###
 
-✅ Você pode adicionar **middlewares** para interceptar requisições e respostas:
+✅ You can add **middlewares** to intercept requests and responses:
 
 ###
 ```python
 @app.middleware("http")
 async def log_request(request, call_next):
-    print(f"Requisição para {request.url.path}")
+    print(f"Requisition for {request.url.path}")
     response = await call_next(request)
     return response
 ```
 
 ###
 
-**<h2>Segurança e autenticação</h2>**
+**<h2>Security and Authentication</h2>**
 
 ###
 
-- API oferece suporte integrado para `OAuth2`, `JWT`, `API Keys` e outras estratégias;
-- Sempre defina modelos para dados de entrada e saída;
-- Use validação automática para evitar erros comuns;
-- Documente cada rota com comentários para facilitar manutenção;
-- Utilize as ferramentas de documentação para testar sua `API` frequentemente;
-- Mantenha seu servidor atualizado para aproveitar melhorias de segurança.
+- API offers integrated support for `OAuth2`, `JWT`, `API Keys` and other strategies;
+- Always define models for input and output data;
+- Use automatic validation to avoid common mistakes;
+- Document each route with comments for easy maintenance;
+- Use documentation tools to test your `API` often;
+- Keep your server updated to take advantage of security improvements.
 
 ---
 
@@ -222,32 +480,34 @@ async def log_request(request, call_next):
 
 ###
 
-✅ `env` está na `.gitignore`, precisa criar toda vez que for usar.
+✅ `env` is in `.gitignore`, you need to create it every time you use it.
 
 ###
 ```python
-grater than = gt ### maior que...
-grater or equal = ge ### maior ou igual...
-lower than = lt ### menor que...
-lower or equal = le ### menor ou igual...
+grater than = gt ### greater than...
+grater or equal = ge ### greater than or equal to...
+lower than = lt ### less than...
+lower or equal = le ### less than or equal to...
 ```
 
 ###
 
-**<h2>Contribuindo</h2>**
+**<h2>Contributing</h2>**
 
 ###
 
-Deseja contribuir? Veja o arquivo [CONTRIBUTING.md](github.com/Kauan19-hub/CONTRIBUTING.md.git) no repositório para guias e código de conduta.
+Do you want to contribute? See the file  [CONTRIBUTING.md](github.com/Kauan19-hub/CONTRIBUTING.md.git) in the repository for guides and code of conduct.
 
 ###
 
-**<h2>Licença</h2>**
+**<h2>License</h2>**
 
 ###
 
-✅️ O projeto está licenciada sob a licença MIT. Você pode usar, modificar e distribuir livremente, desde que mantenha os créditos aos autores originais.
+✅️ The project is licensed under the license  MIT. You may **use**, **modify**, and **distribute freely**, as long as you keep **credit** to the **original authors**. 
 
-É possível desenvolver um pouco de front-end usando o pacote Angular, Bootstrap e tailwind css, e conectá-lo ao Back-End.
+###
+
+It is possible to develop some front-end using Angular, Bootstrap and tailwind css package, and connect it to Back-End. 
 
 ---
