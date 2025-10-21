@@ -188,7 +188,7 @@ Você pode testar **todos** os `endpoints` diretamente pelo navegador.
 ###
 
 - Configurações avançadas;
-- Middlewares.
+- `Middlewares`.
 
 ###
 
@@ -218,11 +218,11 @@ async def log_request(request, call_next):
 
 ---
 
-**</h2>Extras</h2>**
+**<h2>Extras</h2>**
 
 ###
 
-✅ `env` está na `.gitignore`, precisa criar toda vez que for usar;
+✅ `env` está na `.gitignore`, precisa criar toda vez que for usar.
 
 ###
 ```python
