@@ -7,20 +7,6 @@ modernas, **API** facilita a criação, validação e documentação automática
 
 ###
 
-**<h2>Índice</h2>**
-
-###
-
-- O que é API;
-- Instalação;
-- Primeiros passos;
-- Estrutura da API;
-- Exemplos de uso;
-- Configurações avançadas;
-- Instalação.
-
----
-
 **<h2>Começando</h2>**
 
 Para começar a usar **API**, você só precisa do `Python 3.8+` e instalar via `pip`:
@@ -248,15 +234,20 @@ lower or equal = le ### menor ou igual...
 
 ###
 
+**<h2>Contribuindo</h2>**
 
+###
 
+Deseja contribuir? Veja o arquivo (CONTRIBUTING.md)[github.com/Kauan19-hub/CONTRIBUTING.md] no repositório para guias e código de conduta.
 
-Contribuindo
+###
 
-Quer contribuir? Veja o arquivo CONTRIBUTING.md no repositório para guias e código de conduta.
+**<h2>Licença</h2>**
 
-Licença
+###
 
-MinhaAPI está licenciada sob a licença MIT. Você pode usar, modificar e distribuir livremente, desde que mantenha os créditos aos autores originais.
+✅️ O projeto está licenciada sob a licença MIT. Você pode usar, modificar e distribuir livremente, desde que mantenha os créditos aos autores originais.
 
 É possível desenvolver um pouco de front-end usando o pacote Angular, Bootstrap e tailwind css, e conectá-lo ao Back-End.
+
+---
