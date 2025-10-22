@@ -380,9 +380,3 @@ Do you want to contribute? See the file  [CONTRIBUTING.md](https://github.com/Ka
 It is possible to develop some front-end using Angular, Bootstrap and tailwind css package, and connect it to Back-End. 
 
 ---
-
-<img src="https://skillicons.dev/icons?i=vscode" height="30" alt="vscode logo" title="Visual Studio Code"  />
-  <img width="2" /><img src="https://skillicons.dev/icons?i=git" height="30" alt="git logo" title="Git" />
-  <img width="2" />
-  <imgimg src="https://skillicons.dev/icons?i=github" height="30" alt="github logo" title="GitHub" />
-  <img width="2" /
