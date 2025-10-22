@@ -310,7 +310,7 @@ lower or equal = le ### less than or equal...
 
 ###
 
-Want to contribute? See the [CONTRIBUTING.md](github.com/Kauan19-hub/CONTRIBUTING.md.git) file in the repository for guidelines and code of conduct.
+Want to contribute? See the [CONTRIBUTING.md](https://github.com/Kauan19-hub/CONTRIBUTING.md) file in the repository for guidelines and code of conduct.
 
 ###
 
