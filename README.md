@@ -496,7 +496,7 @@ lower or equal = le ### less than or equal to...
 
 ###
 
-Do you want to contribute? See the file  [CONTRIBUTING.md](github.com/Kauan19-hub/CONTRIBUTING.md.git) in the repository for guides and code of conduct.
+Do you want to contribute? See the file  [CONTRIBUTING.md](https://github.com/Kauan19-hub/Kauan19-hub/blob/main/CONTRIBUTING.md) in the repository for guides and code of conduct.
 
 ###
 
