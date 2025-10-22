@@ -182,7 +182,7 @@ Routes define the endpoints of your API. Each route is associated with an HTTP m
 ```python
 @app.get("/items/{item_id}")
 def read_item(item_id: int):
-return {"item_id": item_id}
+    return {"item_id": item_id}
 ```
 
 ###
@@ -207,7 +207,7 @@ price: float
 
 @app.post("/items/")
 def create_item(item: Item):
-return item
+    return item
 ```
 
 ###
@@ -228,7 +228,7 @@ email: str
 
 @app.post("/users/")
 def create_user(user: User):
-return {"message": f"User {user.name} created successfully!"}
+    return {"message": f"User {user.name} created successfully!"}
 ```
 
 ###
@@ -270,9 +270,10 @@ You can test **all** endpoints directly through the browser.
 ```python
 @app.middleware("http")
 async def log_request(request, call_next):
-print(f"Request for {request.url.path}")
-response = await call_next(request)
-return response
+    print(f"Request for {request.url.path}")
+
+    response = await call_next(request)
+    return response
 ```
 
 ###
@@ -297,7 +298,7 @@ return response
 ✅ `env` is in `.gitignore`, you need to create it every time you use it.
 
 ###
-```python
+```
 grater than = gt ### greater than...
 grater or equal = ge ### greater than or equal...
 lower than = lt ### less than...
@@ -483,7 +484,7 @@ async def log_request(request, call_next):
 ✅ `env` is in `.gitignore`, you need to create it every time you use it.
 
 ###
-```python
+```
 grater than = gt ### greater than...
 grater or equal = ge ### greater than or equal to...
 lower than = lt ### less than...
