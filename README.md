@@ -136,7 +136,7 @@ http://127.0.0.1:8000/
 
 ###
 
-✅ : `{"message": "API With Python"}`
+✅ The output: `{"message": "API With Python"}`
 
 ###
 
