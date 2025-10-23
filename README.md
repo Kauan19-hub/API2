@@ -70,38 +70,6 @@ http://127.0.0.1:8000/
 
 ###
 
-**<h2>API Structure</h2>**
-
-###
-
-**Routes**
-
-###
-
-Routes define the endpoints of your API. Each route is associated with an HTTP method:
-
-###
-```python
-@app.get("/path") ### responds to GET requests
-```
-
-###
-```python
-@app.post("/path") ### responds to POST
-```
-
-###
-```python
-@app.put("/path") ### responds to PUT
-```
-
-###
-```python
-@app.delete("/path") ### responds to DELETE
-```
-
-###
-
 **<h2>Parameters</h2>**
 
 ###
