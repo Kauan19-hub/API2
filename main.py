@@ -1,39 +1,40 @@
 # fastapi dev main.py - rodar o script
+# pip install "fastapi[standard]" - instala o FastAPI
 from fastapi import FastAPI
-from typing import Optional
 from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from routes.area_routes import router as area_router
+from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()
-# app.mount('/static', StaticFiles(directory='static'), name='static')
+app = FastAPI(
+  title='API - Áreas da Programação',
+  description='Uma simples API com Back-End e Front-End para para gerenciamento de áreas da tecnologia.',
+  version='1.0.0',
+  contact={
+    'name': 'Kauan Vinícius',
+    'email': 'saleskauan308@gmail.com'
 
-# Uma área foi definida. Nessa API, é possível criar, puxar, atualizar e deletar uma área. Essa é
-# um exemplo:
-AREA = [
-  {
-    'id': 1,
-    'name': 'Full-Stack',
-    'description': 'Be the legend of technology',
-    'hours': 7,
-    'available': True,
-    'languages': 'Portuguese and English',
-    'wage': 15250.00,
-    'market': 'high demand',
-    'difficulty': 'advanced/sênior',
   }
+)
+
+origins = [
+  "http://localhost:5173", # React (Vite)
+  "http://localhost:3000", # React (CRA)
+  "https://site.com" # Deploy do sistema
 ]
 
-# Características da área escolhida foram tipadas
-class Area(BaseModel):
-  name: str
-  description: Optional[str] = None
-  hours: float
-  available: Optional[bool] = True
-  languages: str
-  wage: float
-  market: str
-  difficulty: str
+allow_all = True
+
+app.add_middleware (
+  CORSMiddleware,
+  allow_origins=["*"] if allow_all else origins, # Requisições em qualquer origem
+  allow_credentials=True,
+  allow_methods=["*"], # Permite todos os métodos
+  allow_headers=["*"] # Permite todos os cabeçalhos
+)
+
+app.include_router(area_router)
+
+# app.mount('/static', StaticFiles(directory='static'), name='static')
   
 # GET: Mensagem que será exibida no início (http://127.0.0.1:8000/)
 @app.get('/', response_class=HTMLResponse)
@@ -49,89 +50,83 @@ def root():
     
   </head>
   
-  <body class="font-arial bg-gray-100 flex flex-col items-center p-3 justify-center mt-10">
-    <h2 class="text-2xl font-bold mb-4 text-black">Bem-Vindo(a)!</h2>
-    <button onclick="load()" class="bg-blue-500 text-white px-10 py-3 rounded hover:bg-blue-600 mb-4 hover:shadow-lg">Ver áreas disponíveis</button>
-    <ul id="areas" class="list-inside text-gray-700"></ul>
-  
+  <body class="font-sans bg-gray-100 flex flex-col items-center p-6">
+  <h1 class="text-3xl font-bold text-blue-600 mb-6">API - Áreas da Programação</h1>
+
+  <div class="flex gap-3 mb-6">
+    <a href="/docs" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow">
+      Ver Documentação
+    </a>
+    <button onclick="load()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow">
+      Listar Áreas
+    </button>
+    <button onclick="add()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded shadow">Adicionar Exemplo</button>
+  </div>
+
+  <ul id="areas" class="text-gray-800 w-full max-w-md pl-6 space-y-2"></ul>
+
     <script>
       async function load() {
         const res = await fetch('/area');
         const data = await res.json();
         const ul = document.getElementById('areas');
+
         ul.innerHTML = '';
         data.forEach(a => {
+
           const li = document.createElement('li');
-          li.textContent = a.name + ' - ' + a.description;
+          li.classList.add('flex', 'justify-between', 'items-center', 'mb-2');
+          
+          li.innerHTML = `
+            <span>${a.name} - ${a.description}</span>
+            <button onclick="removeArea('${a.id}')" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded ml-2">
+              Apagar
+            </button>
+          `;
+          
           ul.appendChild(li);
     
         });
-    
       }
+
+      async function add() {
+        const newArea = {
+          name: "CI/CD",
+          description: "Testes e Deploys",
+          hours: 6,
+          available: true,
+          languages: "Inglês",
+          wage: 20100.45,
+          market: "Valorizado",
+          difficulty: "Pleno"
+
+        };
+
+        await fetch('/area', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify(newArea)
+
+        });
+
+        load();
+        
+      }
+
+      async function removeArea(id) {
+        const yesDelete = confirm("Deseja apagar essa área?");
+        if (!yesDelete) return;
+
+        await fetch(`/area/${id}`, {
+          method: 'DELETE'
+        });
+
+        load();
+      }
+
+      console.log("API funcionando")
     </script>
   </body>
   </html>
   """
-  
   return html
-  
-# GET: Retorna todas as áreas;
-@app.get('/area', tags=['area'])
-def list_area() -> list:
-  return AREA
-
-# GET: Retorna áreas disponíveis, percorre a lista AREA e seleciona só aqueles que possuem
-# o campo 'available' = TRUE
-@app.get('/area/available', tags=['area'])
-def lis_available_area() -> list:
-  available_area = []
-  for tech in AREA:
-    if tech['available']:
-      available_area.append(tech)
-  return available_area
-
-# GET: Retorna dados específicos pelo seu ID, caso esse ID ainda não exista, ele retorna 
-# uma string vazia
-@app.get('/area/{area_id}', tags=['area'])
-def obtain_techno(area_id: int) -> dict:
-  for technology in AREA:
-    if technology['id'] == area_id:
-      return technology
-  return{}
-
-# POST: Uma nova área poderá ser adicionada à lista
-@app.post('/area', tags=['area'])
-def add_techno(new_tech: Area) -> dict:
-  new_tech = new_tech.dict()
-  new_tech['id'] = len(AREA) + 1
-  AREA.append(new_tech)
-  return new_tech
-
-# PUT: A área poderá ser atualizada através de seu ID
-@app.put('/area/{area_id}', tags=['area'])
-def up_techno(area_id: int, area: Area) -> dict:
-  for idx, tec in enumerate(AREA):
-    if tec['id'] == area_id:
-      AREA[idx] = area.dict()
-      AREA[idx]['id'] = area_id
-      return AREA[idx]
-  return{}
-
-# DELETE: A área poderá ser deletada pelo seu ID, aqui pode deletar uma área que foi 
-# adicionada
-@app.delete('/area/{area_id}', tags=['area'])
-def delete_techno(area_id: int) -> dict:
-  for idx, tec in enumerate(AREA):
-    if tec['id'] == area_id:
-      AREA.pop(idx)
-      return {'message': "This technology has been succesfully removed."}
-  return{}
-
-# grater than = gt / maior que...
-# grater or equal = ge / maior ou igual...
-# lower than = lt / menor que...
-# lower or equal = le / menor ou igual...
-
-# POST: send data;
-# PUT: update data;
-# DELETE: delette data.
