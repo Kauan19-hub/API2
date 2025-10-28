@@ -2,8 +2,12 @@
 # pip install "fastapi[standard]" - instala o FastAPI
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from routes.area_routes import router as area_router
 from fastapi.middleware.cors import CORSMiddleware
+import os
+
 
 app = FastAPI(
   title='API - Áreas da Programação',
@@ -32,6 +36,13 @@ app.add_middleware (
   allow_headers=["*"] # Permite todos os cabeçalhos
 )
 
+os.makedirs("static", exist_ok=True)
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+  return FileResponse("static/favicon.ico")
+
 app.include_router(area_router)
 
 # app.mount('/static', StaticFiles(directory='static'), name='static')
@@ -44,6 +55,7 @@ def root():
   <html lang="pt-BR">
   <head>
     <title>API - Áreas da Programação</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     
     <!-- TAILWINDCSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
