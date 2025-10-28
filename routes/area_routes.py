@@ -44,7 +44,7 @@ def up_techno(area_id: int, area: Area) -> dict:
       AREA[idx] = area.dict()
       AREA[idx]['id'] = area_id
       return AREA[idx]
-  return{}
+  raise HTTPException(status_code=404,detail="Área não foi encontrada para alteração.")
 
 # DELETE: A área poderá ser deletada pelo seu ID, aqui pode deletar uma área que foi 
 # adicionada
