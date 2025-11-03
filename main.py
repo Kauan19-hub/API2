@@ -55,13 +55,13 @@ def root():
 <html lang="pt-BR">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>API - Áreas da Programação</title>
-<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-<script src="https://cdn.tailwindcss.com"></script>
+<title>Áreas da Programação</title>
+<link rel="icon" href="/static/fastlogo.webp" type="image/png">
+<script src="https://cdn.tailwindcss.com"></script> 
 </head>
 <body class="font-sans bg-gray-100 flex flex-col items-center min-h-screen p-6 sm:p-10">
 
-<h1 class="text-3xl font-bold text-blue-600 mb-6 text-center">API - Áreas da Programação</h1>
+<h1 class="text-3xl font-bold text-blue-600 mb-6 text-center">Áreas da Programação</h1>
 
 <!-- Mensagens -->
 <div id="msg" class="hidden mb-4 w-full max-w-md text-center px-4 py-2 rounded-lg"></div>
@@ -141,8 +141,8 @@ async function load() {
           <p class="text-sm text-gray-600">${a.description}</p>
         </div>
         <div class="flex gap-2 mt-2 sm:mt-0">
-          <button onclick="editArea(${a.id}, '${a.name}', '${a.description}')" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm transition">✏️ Editar</button>
-          <button onclick="removeArea(${a.id})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm transition">🗑️ Apagar</button>
+          <button onclick="editArea(${a.id}, '${a.name}', '${a.description}')" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm transition">Editar</button>
+          <button onclick="removeArea(${a.id})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm transition">Apagar</button>
         </div>
       `;
       ul.appendChild(li);
