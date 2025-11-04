@@ -12,6 +12,11 @@ https://127.0.0.1:8000/
 
 ###
 
+<img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/c12c790e-8f97-40ba-a3c6-9661e66f1795" /><br>
+<img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/8f47f13b-bc8f-47da-b40c-e7bd5afad131" /><br>
+
+---
+
 API is a light and intuitive **library**/**framework** to build **APIs** **RESTful** quickly and efficiently in **Python**. Inspired by good practices
 modern, **API** facilitates the automatic creation, validation and documentation of your application's routes. 
 
