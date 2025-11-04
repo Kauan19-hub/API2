@@ -10,8 +10,8 @@ import os
 
 
 app = FastAPI(
-  title='API - Áreas da Programação',
-  description='Uma simples API com Back-End e Front-End para para gerenciamento de áreas da tecnologia.',
+  title='Áreas da Programação',
+  description='Uma simples API com Back-End e Front-End para gerenciamento de áreas da tecnologia.',
   version='1.0.0',
   contact={
     'name': 'Kauan Vinícius',
