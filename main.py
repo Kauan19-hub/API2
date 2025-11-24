@@ -50,6 +50,8 @@ app.include_router(area_router)
 # GET: Mensagem que será exibida no início (http://127.0.0.1:8000/)
 @app.get('/', response_class=HTMLResponse)
 def root():
+  
+  # TailwindCSS + HTML
   html = """
     <!DOCTYPE html>
 <html lang="pt-BR">
